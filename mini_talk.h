@@ -6,6 +6,7 @@
 # include <signal.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include "libft/libft.h"
 
 
 
