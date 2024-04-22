@@ -2,5 +2,3 @@
 
 // convert binary to char*
 // convert char* to binary
-
-
