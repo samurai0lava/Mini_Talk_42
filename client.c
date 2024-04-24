@@ -7,13 +7,16 @@ static void send_message(pid_t pid, int message)
 
 static int char_to_bin(char *str)
 {
-	int i;
+    int i = 0;
+    int binary = 0;
 
-	i = 0;
-	/*
-		convert string to binary to send it with siguser1
-		using bitwise operations
-	*/
+    while (str[i] != '\0')
+    {
+        binary <<= 8; // shift binary left by 8 bits
+        binary |= str[i]; // bitwise OR operation to set the least significant 8 bits
+        i++;
+    }
+    return binary;
 }
 static int ft_isdigit_adv(char *argv)
 {
