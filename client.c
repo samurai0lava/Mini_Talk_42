@@ -13,7 +13,7 @@ static int char_to_bin(char *str)
     while (str[i] != '\0')
     {
         binary <<= 8; // shift binary left by 8 bits
-        binary |= str[i]; // bitwise OR operation to set the least significant 8 bits
+        binary |= str[i];
         i++;
     }
     return binary;
@@ -33,15 +33,17 @@ static int ft_isdigit_adv(char *argv)
 	return(1);
 }
 
-   
+void handler(int sig)
+{
+	ft_printf("test%d\n", sig);
+}
 int main(int argc, char **argv)
 {
 	pid_t				pid;
-	int					i;
 	int message;
-	// struct sigaction	sa;
-	// sa.sa_handler = &handler;
-	// sigaction(SIGINT, &sa, NULL);
+	struct sigaction	sa;
+	sa.sa_handler = &handler;
+	sigaction(SIGUSR1, &sa, NULL);
 	if(argc == 2 && ft_isdigit_adv(argv[1]) == 1)
 	{
 		message = char_to_bin(argv[2]);
