@@ -22,6 +22,8 @@ static void	sending_msg(pid_t pid, unsigned char octet)
 static int ft_isdigit_adv(char *argv)
 {
 	int i;
+	if(argv == NULL)
+		return(0);
 
 	i = 0;
 	while (argv[i])
