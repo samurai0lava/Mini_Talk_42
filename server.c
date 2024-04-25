@@ -1,7 +1,7 @@
 #include "mini_talk.h"
 
 static bin_to_char(int binary)
-{
+{0
 	int i;
 	i = 0;
 	/*

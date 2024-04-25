@@ -5,19 +5,7 @@ static void send_message(pid_t pid, int message)
 	kill(pid, SIGUSR1 | message);
 }
 
-static int char_to_bin(char *str)
-{
-    int i = 0;
-    int binary = 0;
 
-    while (str[i] != '\0')
-    {
-        binary <<= 8; // shift binary left by 8 bits
-        binary |= str[i];
-        i++;	
-    }
-    return binary;
-}
 static int ft_isdigit_adv(char *argv)
 {
 	int i;
@@ -39,9 +27,13 @@ void handler(int sig)
 }
 int main()
 {
+	int i;
+	i = 0;
 	char *str = "il";
-	int bin = char_to_bin(str);
-	printf("bin %d\n", bin);
+	int* bin = string_to_binary(str);
+
+	printf("bin %d\n", bin[0]);
+
 }
 // int main(int argc, char **argv)
 // {
