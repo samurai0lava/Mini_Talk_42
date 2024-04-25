@@ -1,28 +1,39 @@
 #include "mini_talk.h"
 
-static bin_to_char(int binary)
-{0
-	int i;
-	i = 0;
-	/*
-		convert binary to string after recieved it from the client  do i need a function to check if recieved or not
-		using bitwise operations
-	*/
-	
+void	handler(int sigsent)
+{
+	static unsigned char	buff;
+	static int				i;
+
+	buff |= (sigsent == SIGUSR1);
+	i++;
+	if (i == 8)
+	{
+		ft_printf("%c", buff);
+		i = 0;
+		buff = 0;
+	}
+	else
+		buff <<= 1;
 }
+
 int main(int argc, char **argv)
 {
 	pid_t pid;
 	(void)argv;
-	// struct sigaction sa;
 	if(argc == 1)
 	{
 		pid = getpid();
 		ft_printf("%d\n", pid);
+		signal(SIGUSR1, handler);
+		signal(SIGUSR2, handler);
 		while(1)
 		{
 			pause(); //wait for the client to send a message
 		}
 	}
-	return(0);
+	else
+	{
+		ft_printf("Usage: ./server\n");
+	}
 }

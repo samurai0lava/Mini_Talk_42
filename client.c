@@ -1,8 +1,21 @@
 #include "mini_talk.h"
 
-static void send_message(pid_t pid, int message)
+static void	sending_msg(pid_t pid, unsigned char octet)
 {
-	kill(pid, SIGUSR1 | message);
+	int				i;
+	unsigned char	octet_tmp;
+
+	octet_tmp = octet;
+	i = 8;
+	while (i-- > 0)
+	{
+		octet_tmp = octet >> i;
+		if (octet_tmp % 2 == 0)
+			kill(pid, SIGUSR2);
+		else
+			kill(pid, SIGUSR1);
+		usleep(100);
+	}
 }
 
 
@@ -21,36 +34,27 @@ static int ft_isdigit_adv(char *argv)
 	return(1);
 }
 
-void handler(int sig)
+
+int main(int argc, char **argv)
 {
-	ft_printf("test%d\n", sig);
-}
-int main()
-{
+	pid_t				pid;
+	char				*message;
 	int i;
-	i = 0;
-	char *str = "il";
-	int* bin = string_to_binary(str);
 
-	printf("bin %d\n", bin[0]);
 
+	if(argc == 3 && ft_isdigit_adv(argv[1]) == 1)
+	{
+		i = 0;
+		message = argv[2];
+		pid = ft_atoi(argv[1]);
+		while(message[i])
+		{
+			sending_msg(pid, message[i]);
+			i++;
+		}
+	}
+	else
+	{
+		ft_printf("Usage: ./client [server_pid] [message]\n");
+	}
 }
-// int main(int argc, char **argv)
-// {
-// 	pid_t				pid;
-// 	int message;
-// 	struct sigaction	sa;
-// 	sa.sa_handler = &handler;
-// 	sigaction(SIGUSR1, &sa, NULL);
-// 	if(argc == 2 && ft_isdigit_adv(argv[1]) == 1)
-// 	{
-// 		message = char_to_bin(argv[2]);
-// 		pid = ft_atoi(argv[1]);
-// 		while(1)
-// 		{
-// 			send_message(pid, message);
-// 			sleep(1); //wait the server to process the message sent
-// 		}
-// 	}
-
-// }
