@@ -6,7 +6,7 @@
 /*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:42:56 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/04/30 14:06:16 by iouhssei         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:32:40 by iouhssei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ int	main(int argc, char **argv)
 	(void)argv;
 	struct sigaction	sa;
 
-	sa.sa_handler = handler;	
+	sa.sa_handler = handler;
 	if (argc == 1)
 	{
 		pid = getpid();
 		ft_printf("%d\n", pid);
 		sigaction(SIGUSR1, &sa, NULL);
 		sigaction(SIGUSR2, &sa, NULL);
-
 		while (1)
 		{
 			pause();
