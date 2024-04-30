@@ -4,7 +4,7 @@ CLIENT = client
 SERVER = server
 LIB = libft/libft.a
 
-SRCS = server.c client.c utils.c
+SRCS = server.c client.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(SERVER) $(CLIENT) $(LIB)
@@ -12,11 +12,11 @@ all: $(SERVER) $(CLIENT) $(LIB)
 $(LIB):
 	$(MAKE) -C libft/
 
-$(CLIENT): client.o utils.o $(LIB)
-	$(CC) $(CFLAGS) -o $@ client.o utils.o $(LIB)
+$(CLIENT): client.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ client.o $(LIB)
 
-$(SERVER): server.o utils.o $(LIB)
-	$(CC) $(CFLAGS) -o $@ server.o utils.o $(LIB)
+$(SERVER): server.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ server.o $(LIB)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@

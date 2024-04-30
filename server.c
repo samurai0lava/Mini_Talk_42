@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/30 13:42:56 by iouhssei          #+#    #+#             */
+/*   Updated: 2024/04/30 14:06:16 by iouhssei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_talk.h"
 
 void	handler(int sigsent)
@@ -17,19 +29,23 @@ void	handler(int sigsent)
 		buff <<= 1;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	pid_t pid;
+	pid_t				pid;
 	(void)argv;
-	if(argc == 1)
+	struct sigaction	sa;
+
+	sa.sa_handler = handler;	
+	if (argc == 1)
 	{
 		pid = getpid();
 		ft_printf("%d\n", pid);
-		signal(SIGUSR1, handler);
-		signal(SIGUSR2, handler);
-		while(1)
+		sigaction(SIGUSR1, &sa, NULL);
+		sigaction(SIGUSR2, &sa, NULL);
+
+		while (1)
 		{
-			pause(); //wait for the client to send a message
+			pause();
 		}
 	}
 	else
