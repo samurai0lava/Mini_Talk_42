@@ -30,7 +30,11 @@ static int	sending_msg(pid_t pid, unsigned char octet)
 		usleep(300);
 	}
 	return (check);
-	//send '\0' wich is 8 bits "0000 0000" to said to the server that u finihed the message and u send back a signal to the client to tell him that u have recieved the whole messag
+}
+
+static void send_end_of_message(pid_t pid)
+{
+    sending_msg(pid, '\0');
 }
 
 static int	ft_isdigit_adv(char *argv)
@@ -50,13 +54,24 @@ static int	ft_isdigit_adv(char *argv)
 	return (1);
 }
 
+void handler(int sig)
+{
+    if (sig == SIGUSR1)
+    {
+        ft_printf("The message has been received.\n");
+    }
+}
+
 int	main(int argc, char **argv)
 {
 	pid_t				pid;
 	char				*message;
 	int					i;
 	int					check;
-
+	struct sigaction	sa;
+	
+	sa.sa_handler = handler;
+	sigaction(SIGUSR1, &sa, NULL);
 	if (argc == 3 && ft_isdigit_adv(argv[1]) == 1)
 	{
 		i = 0;
@@ -71,6 +86,7 @@ int	main(int argc, char **argv)
 			}
 			i++;
 		}
+		send_end_of_message(pid);
 	}
 	else
 	{

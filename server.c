@@ -14,19 +14,37 @@
 
 void	handler(int sigsent)
 {
-	static unsigned char	buff;
-	static int				i;
+    static unsigned char	buff;
+    static int				i;
+    static pid_t			client_pid;
+    static int				client_pid_received;
 
-	buff |= (sigsent == SIGUSR1);
-	i++;
-	if (i == 8)
-	{
-		ft_printf("%c", buff);
-		i = 0;
-		buff = 0;
-	}
-	else
-		buff <<= 1;
+	client_pid_received = 0;
+    buff |= (sigsent == SIGUSR1);
+    i++;
+    if (i == 8)
+    {
+        if (!client_pid_received)
+        {
+            client_pid = buff;
+            client_pid_received = 1;
+        }
+        else if (buff == '\0')
+        {
+            kill(client_pid, SIGUSR1);
+            client_pid_received = 0; // Ready to receive the PID of the next client
+        }
+        else
+        {
+            ft_printf("%c", buff);
+        }
+        i = 0;
+        buff = 0;
+    }
+    else
+    {
+        buff <<= 1;
+    }
 }
 
 int	main(int argc, char **argv)
