@@ -87,7 +87,7 @@ int main(int argc, char **argv)
             if (check == -1)
             {
                 ft_printf("Invalid pid\n");
-                return 1; // Exit the program on error
+                return 1;
             }
             i++;
         }

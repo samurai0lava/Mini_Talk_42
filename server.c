@@ -34,9 +34,9 @@ void handler(int sigsent, siginfo_t *info, void *context)
         }
         else if (buff == '\0')
         {
-            ft_printf("End of message received from client %d.\n", client_pid);
-            client_pid_received = 0;
             kill(client_pid, SIGUSR1);
+            client_pid_received = 0;
+            
         }
         else
         {
