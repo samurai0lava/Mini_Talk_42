@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 13:42:43 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/04/30 17:54:42 by iouhssei         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "mini_talk.h"
 
 static int	sending_msg(pid_t pid, unsigned char octet)
@@ -100,8 +88,8 @@ int main(int argc, char **argv)
     else
     {
         ft_printf("Usage: ./client [server_pid] [message]\n");
-        return 1; // Exit the program due to incorrect usage
+        return (1);
     }
 
-    return 0; // Exit with success
+    return (0); // Exit with success
 }
