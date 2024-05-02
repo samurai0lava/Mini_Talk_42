@@ -54,42 +54,54 @@ static int	ft_isdigit_adv(char *argv)
 	return (1);
 }
 
+int message_received = 0;
+
 void handler(int sig)
 {
     if (sig == SIGUSR1)
     {
         ft_printf("The message has been received.\n");
+        message_received = 1;
     }
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	pid_t				pid;
-	char				*message;
-	int					i;
-	int					check;
-	struct sigaction	sa;
-	
-	sa.sa_handler = handler;
-	sigaction(SIGUSR1, &sa, NULL);
-	if (argc == 3 && ft_isdigit_adv(argv[1]) == 1)
-	{
-		i = 0;
-		message = argv[2];
-		pid = ft_atoi(argv[1]);
-		while (message[i])
-		{
-			check = sending_msg(pid, message[i]);
-			if (check == -1)
-			{
-				ft_printf ("Invalid pid\n");
-			}
-			i++;
-		}
-		send_end_of_message(pid);
-	}
-	else
-	{
-		ft_printf("Usage: ./client [server_pid] [message]\n");
-	}
+    pid_t pid;
+    char *message;
+    int i;
+    int check;
+    struct sigaction sa;
+
+
+    sa.sa_handler = handler;
+    sigaction(SIGUSR1, &sa, NULL);
+    if (argc == 3 && ft_isdigit_adv(argv[1]) == 1)
+    {
+        i = 0;
+        message = argv[2];
+        pid = ft_atoi(argv[1]);
+        while (message[i])
+        {
+            check = sending_msg(pid, message[i]);
+            if (check == -1)
+            {
+                ft_printf("Invalid pid\n");
+                return 1; // Exit the program on error
+            }
+            i++;
+        }
+        send_end_of_message(pid);
+        while (message_received == 0)
+        {
+            pause();
+        }
+    }
+    else
+    {
+        ft_printf("Usage: ./client [server_pid] [message]\n");
+        return 1; // Exit the program due to incorrect usage
+    }
+
+    return 0; // Exit with success
 }
