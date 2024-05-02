@@ -14,10 +14,10 @@
 
 void handler(int sigsent, siginfo_t *info, void *context)
 {
-    static unsigned char buff = 0;
-    static int i = 0;
-    static pid_t client_pid;
-    static int client_pid_received = 0;
+    static unsigned char    buff = 0;
+    static int              i = 0;
+    static pid_t            client_pid;
+    static int              client_pid_received = 0;
 
     (void)context;
     (void)info;
@@ -74,8 +74,8 @@ int main(int argc, char **argv)
     else
     {
         ft_printf("Usage: ./server\n");
-        return 1; // Exit with error due to incorrect usage
+        return (1);
     }
 
-    return 0; // Exit with success
+    return (0);
 }
