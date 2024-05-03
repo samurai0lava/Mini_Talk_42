@@ -12,25 +12,22 @@
 
 #include "../inc/mini_talk.h"
 
+static int i = 0;
+static unsigned char	buff = 0;
 void handler(int sigsent)
 {
-    static unsigned char    buff;
-    static int              i;
-    
-    buff = 0;
-    i = 0;
-    buff |= (sigsent == SIGUSR1);
-    i++;
-    if (i == 8)
-    {
-        ft_printf("%c", buff);
-        i = 0;
-        buff = 0;
-    }
-    else
-    {
-        buff <<= 1;
-    }
+	
+
+	buff |= (sigsent == SIGUSR1);
+	i++;
+	if (i == 8)
+	{
+		ft_printf("%c", buff);
+		i = 0;
+		buff = 0;
+	}
+	else
+		buff <<= 1;
 }
 
 int main(int argc, char **argv)
