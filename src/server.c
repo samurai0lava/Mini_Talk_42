@@ -6,19 +6,16 @@
 /*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:42:56 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/05/02 22:05:49 by iouhssei         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:20:20 by iouhssei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/mini_talk.h"
 
-void handler(int sigsent, siginfo_t *info, void *context)
+void handler(int sigsent)
 {
     static unsigned char    buff;
     static int              i;
-
-    (void)context;
-    (void)info;
     
     buff = 0;
     i = 0;
@@ -27,8 +24,7 @@ void handler(int sigsent, siginfo_t *info, void *context)
     if (i == 8)
     {
         ft_printf("%c", buff);
-        i = 0;
-        buff = 0;
+
     }
     else
     {
