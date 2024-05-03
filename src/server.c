@@ -6,7 +6,7 @@
 /*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:42:56 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/05/03 13:20:20 by iouhssei         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:24:08 by iouhssei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void handler(int sigsent)
     if (i == 8)
     {
         ft_printf("%c", buff);
-
+        i = 0;
+        buff = 0;
     }
     else
     {

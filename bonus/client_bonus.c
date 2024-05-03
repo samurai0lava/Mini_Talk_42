@@ -1,4 +1,6 @@
-#include "mini_talk.h"
+#include "../inc/mini_talk.h"
+
+int message_received = 0;
 
 static int	sending_msg(pid_t pid, unsigned char octet)
 {
@@ -42,7 +44,7 @@ static int	ft_isdigit_adv(char *argv)
 	return (1);
 }
 
-int message_received = 0;
+
 
 void handler(int sig)
 {
@@ -90,6 +92,5 @@ int main(int argc, char **argv)
         ft_printf("Usage: ./client [server_pid] [message]\n");
         return (1);
     }
-
-    return (0); // Exit with success
+    return (0);
 }

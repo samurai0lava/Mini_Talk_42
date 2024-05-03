@@ -6,7 +6,7 @@
 /*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:42:43 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/05/02 22:06:11 by iouhssei         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:37:56 by iouhssei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ static int	ft_isdigit_adv(char *argv)
 
 int main(int argc, char **argv)
 {
-    pid_t pid;
-    char *message;
-    int i;
-    int check;
+    pid_t	pid;
+    char	*message;
+    int		i;
+    int 	check;
     
     if (argc == 3 && ft_isdigit_adv(argv[1]) == 1)
     {
@@ -77,6 +77,5 @@ int main(int argc, char **argv)
         ft_printf("Usage: ./client [server_pid] [message]\n");
         return (1);
     }
-
     return (0);
 }

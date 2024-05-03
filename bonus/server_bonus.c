@@ -1,4 +1,4 @@
-#include "mini_talk.h"
+#include "../inc/mini_talk.h"
 
 void handler(int sigsent, siginfo_t *info, void *context)
 {
