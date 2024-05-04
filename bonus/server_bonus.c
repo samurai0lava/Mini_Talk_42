@@ -24,7 +24,7 @@ void handler(int sigsent, siginfo_t *info, void *context)
         {
             kill(client_pid, SIGUSR1);
             client_pid_received = 0;
-            
+            usleep(300);
         }
         else
         {

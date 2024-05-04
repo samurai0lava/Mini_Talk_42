@@ -52,6 +52,5 @@ int main(int argc, char **argv)
         ft_printf("Usage: ./server\n");
         return (1);
     }
-
     return (0);
 }

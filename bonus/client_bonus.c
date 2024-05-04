@@ -19,6 +19,7 @@ static int	sending_msg(pid_t pid, unsigned char octet)
 			check = kill(pid, SIGUSR1);
 		usleep(300);
 	}
+
 	return (check);
 }
 
@@ -43,8 +44,6 @@ static int	ft_isdigit_adv(char *argv)
 	}
 	return (1);
 }
-
-
 
 void handler(int sig)
 {
