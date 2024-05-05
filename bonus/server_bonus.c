@@ -2,25 +2,24 @@
 
 void handler(int sigsent, siginfo_t *info, void *context)
 {
-    static unsigned char    buff = 0;
-    static int              i = 0;
-    static pid_t            client_pid;
-    static int              client_pid_received = 0;
+    static unsigned char buff = 0;
+    static int i = 0;
+    static pid_t client_pid = 0;  // Initialize to 0
+    static int client_pid_received = 0;
 
     (void)context;
     (void)info;
-    client_pid = info->si_pid;
+    if (!client_pid_received) {
+        client_pid = info->si_pid;
+        client_pid_received = 1;
+    }
+
     buff |= (sigsent == SIGUSR1);
     i++;
 
     if (i == 8)
     {
-        if (!client_pid_received)
-        {
-            client_pid = buff;
-            client_pid_received = 1;
-        }
-        else if (buff == '\0')
+        if (buff == '\0')
         {
             kill(client_pid, SIGUSR1);
             client_pid_received = 0;
@@ -30,7 +29,6 @@ void handler(int sigsent, siginfo_t *info, void *context)
         {
             ft_printf("%c", buff);
         }
-
         i = 0;
         buff = 0;
     }
@@ -39,6 +37,7 @@ void handler(int sigsent, siginfo_t *info, void *context)
         buff <<= 1;
     }
 }
+
 
 int main(int argc, char **argv)
 {
