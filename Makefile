@@ -25,7 +25,7 @@ $(SERVER) : $(OBJS) $(LIB)
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(SERVER_BONUS) $(CLIENT_BONUS)
+bonus: $(SERVER_BONUS) $(CLIENT_BONUS) $(LIB)
 
 $(CLIENT_BONUS) : $(OBJS_BONUS) $(LIB)
 	$(CC) $(CFLAGS) -o $@ bonus/client_bonus.o $(LIB)
