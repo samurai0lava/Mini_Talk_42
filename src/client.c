@@ -27,7 +27,7 @@ static int	sending_msg(pid_t pid, unsigned char octet)
 			check = kill(pid, SIGUSR2);
 		else
 			check = kill(pid, SIGUSR1);
-		usleep(300);
+		usleep(500);
 	}
 	return (check);
 }

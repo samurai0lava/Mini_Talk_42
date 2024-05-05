@@ -12,12 +12,11 @@
 
 #include "../inc/mini_talk.h"
 
-static int i = 0;
-static unsigned char	buff = 0;
+
 void handler(int sigsent)
 {
-	
-
+	static int              i;
+    static unsigned char    buff;
 	buff |= (sigsent == SIGUSR1);
 	i++;
 	if (i == 8)

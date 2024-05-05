@@ -4,7 +4,7 @@ void handler(int sigsent, siginfo_t *info, void *context)
 {
     static unsigned char buff = 0;
     static int i = 0;
-    static pid_t client_pid = 0;  // Initialize to 0
+    static pid_t client_pid = 0;
     static int client_pid_received = 0;
 
     (void)context;
@@ -23,7 +23,7 @@ void handler(int sigsent, siginfo_t *info, void *context)
         {
             kill(client_pid, SIGUSR1);
             client_pid_received = 0;
-            usleep(300);
+            usleep(500);
         }
         else
         {
