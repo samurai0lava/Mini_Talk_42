@@ -2,11 +2,10 @@
 
 int message_received = 0;
 
-static int	sending_msg(pid_t pid, unsigned char octet)
+static void	sending_msg(pid_t pid, unsigned char octet)
 {
 	int				i;
 	unsigned char	octet_tmp;
-	int				check;
 
 	octet_tmp = octet;
 	i = 8;
@@ -14,13 +13,11 @@ static int	sending_msg(pid_t pid, unsigned char octet)
 	{
 		octet_tmp = octet >> i;
 		if (octet_tmp % 2 == 0)
-			check = kill(pid, SIGUSR2);
+			kill(pid, SIGUSR2);
 		else
-			check = kill(pid, SIGUSR1);
+			kill(pid, SIGUSR1);
 		usleep(500);
 	}
-
-	return (check);
 }
 
 static void send_end_of_message(pid_t pid)
@@ -56,12 +53,11 @@ void handler(int sig)
 
 int main(int argc, char **argv)
 {
-    pid_t pid;
-    char *message;
-    int i;
-    int check;
-    struct sigaction sa;
-
+    pid_t       pid;
+    char        *message;
+    int         i;
+    int         check;
+    struct      sigaction sa;
 
     sa.sa_handler = handler;
     sigaction(SIGUSR1, &sa, NULL);
@@ -70,26 +66,16 @@ int main(int argc, char **argv)
         i = 0;
         message = argv[2];
         pid = ft_atoi(argv[1]);
-        while (message[i])
-        {
-            check = sending_msg(pid, message[i]);
-            if (check == -1)
-            {
-                ft_printf("Invalid pid\n");
-                return 1;
-            }
-            i++;
-        }
-        send_end_of_message(pid);
+        check = kill(pid, 0);
+        if(check == -1)
+            error_exit("Error: Invalid Pid");
+        sending_msg_str(pid, message);
         while (message_received == 0)
         {
             pause();
         }
     }
     else
-    {
-        ft_printf("Usage: ./client [server_pid] [message]\n");
-        return (1);
-    }
+        error_exit("Usage: ./client [server_pid] [message]");
     return (0);
 }

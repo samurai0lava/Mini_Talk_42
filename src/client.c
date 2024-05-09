@@ -6,17 +6,16 @@
 /*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:42:43 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/05/03 15:37:56 by iouhssei         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:55:22 by iouhssei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/mini_talk.h"
 
-static int	sending_msg(pid_t pid, unsigned char octet)
+static void	sending_msg(pid_t pid, unsigned char octet)
 {
 	int				i;
 	unsigned char	octet_tmp;
-	int				check;
 
 	octet_tmp = octet;
 	i = 8;
@@ -24,12 +23,11 @@ static int	sending_msg(pid_t pid, unsigned char octet)
 	{
 		octet_tmp = octet >> i;
 		if (octet_tmp % 2 == 0)
-			check = kill(pid, SIGUSR2);
+			kill(pid, SIGUSR2);
 		else
-			check = kill(pid, SIGUSR1);
+			kill(pid, SIGUSR1);
 		usleep(500);
 	}
-	return (check);
 }
 
 static int	ft_isdigit_adv(char *argv)
@@ -49,6 +47,12 @@ static int	ft_isdigit_adv(char *argv)
 	return (1);
 }
 
+void	error_exit(char *error_message)
+{
+	ft_printf("%s\n", error_message);
+	exit(1);
+}
+
 int main(int argc, char **argv)
 {
     pid_t	pid;
@@ -61,21 +65,16 @@ int main(int argc, char **argv)
         i = 0;
         message = argv[2];
         pid = ft_atoi(argv[1]);
+		check = kill(pid, 0);
+		if(check == -1)
+			error_exit("Error: Invalid Pid");
         while (message[i])
         {
-            check = sending_msg(pid, message[i]);
-            if (check == -1)
-            {
-                ft_printf("Invalid pid\n");
-                return (1);
-            }
-            i++;
-        }
-    }
-    else
-    {
-        ft_printf("Usage: ./client [server_pid] [message]\n");
-        return (1);
-    }
+			sending_msg(pid, message[i]);
+			i++;
+		}
+	}
+	else
+		error_exit("Usage: ./client [server_pid] [message]");
     return (0);
 }
