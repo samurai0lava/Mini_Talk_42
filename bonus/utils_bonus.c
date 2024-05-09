@@ -1,4 +1,4 @@
-#include "../inc/mini_talk.h"
+#include "../inc/mini_talk_bonus.h"
 
 void	sending_msg(pid_t pid, unsigned char octet)
 {
@@ -14,7 +14,7 @@ void	sending_msg(pid_t pid, unsigned char octet)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		usleep(500);
+		usleep(400);
 	}
 }
 

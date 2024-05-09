@@ -1,29 +1,6 @@
-#include "../inc/mini_talk.h"
+#include "../inc/mini_talk_bonus.h"
 
 int message_received = 0;
-
-static void	sending_msg(pid_t pid, unsigned char octet)
-{
-	int				i;
-	unsigned char	octet_tmp;
-
-	octet_tmp = octet;
-	i = 8;
-	while (i-- > 0)
-	{
-		octet_tmp = octet >> i;
-		if (octet_tmp % 2 == 0)
-			kill(pid, SIGUSR2);
-		else
-			kill(pid, SIGUSR1);
-		usleep(500);
-	}
-}
-
-static void send_end_of_message(pid_t pid)
-{
-    sending_msg(pid, '\0');
-}
 
 static int	ft_isdigit_adv(char *argv)
 {

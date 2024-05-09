@@ -6,8 +6,8 @@ CLIENT_BONUS = client_bonus
 SERVER_BONUS = server_bonus
 LIB = libft/libft.a
 
-SRC_BONUS = bonus/server_bonus.c bonus/client_bonus.c
-SRCS = src/server.c src/client.c
+SRC_BONUS = bonus/server_bonus.c bonus/client_bonus.c bonus/utils_bonus.c
+SRCS = src/server.c src/client.c src/utils.c
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRC_BONUS:.c=.o)
 
@@ -17,10 +17,10 @@ $(LIB):
 	$(MAKE) -C libft/
 
 $(CLIENT) : $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) -o $@ src/client.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ src/client.o src/utils.o $(LIB)
 
 $(SERVER) : $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) -o $@ src/server.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ src/server.o src/utils.o $(LIB)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -28,10 +28,10 @@ $(SERVER) : $(OBJS) $(LIB)
 bonus: $(SERVER_BONUS) $(CLIENT_BONUS) $(LIB)
 
 $(CLIENT_BONUS) : $(OBJS_BONUS) $(LIB)
-	$(CC) $(CFLAGS) -o $@ bonus/client_bonus.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ bonus/client_bonus.o bonus/utils_bonus.c $(LIB)
 
 $(SERVER_BONUS) : $(OBJS_BONUS) $(LIB)
-	$(CC) $(CFLAGS) -o $@ bonus/server_bonus.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ bonus/server_bonus.o bonus/utils_bonus.c $(LIB)
 
 clean:
 	@rm -f $(OBJS) $(OBJS_BONUS)

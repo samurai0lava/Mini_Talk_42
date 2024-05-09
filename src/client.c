@@ -6,7 +6,7 @@
 /*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:42:43 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/05/09 18:55:22 by iouhssei         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:31:35 by iouhssei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	sending_msg(pid_t pid, unsigned char octet)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		usleep(500);
+		usleep(400);
 	}
 }
 
@@ -45,12 +45,6 @@ static int	ft_isdigit_adv(char *argv)
 			return (0);
 	}
 	return (1);
-}
-
-void	error_exit(char *error_message)
-{
-	ft_printf("%s\n", error_message);
-	exit(1);
 }
 
 int main(int argc, char **argv)
