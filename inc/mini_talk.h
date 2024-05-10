@@ -6,7 +6,7 @@
 /*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:43:24 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/05/09 15:58:58 by iouhssei         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:07:03 by iouhssei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include <sys/types.h>
 # include "../libft/libft.h"
 
-void error_exit(char *error_message);
+void	error_exit(char *error_message);
 
 #endif

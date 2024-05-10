@@ -6,7 +6,7 @@
 /*   By: iouhssei <iouhssei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:42:43 by iouhssei          #+#    #+#             */
-/*   Updated: 2024/05/09 20:31:35 by iouhssei         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:55:16 by iouhssei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,28 @@ static int	ft_isdigit_adv(char *argv)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    pid_t	pid;
-    char	*message;
-    int		i;
-    int 	check;
-    
-    if (argc == 3 && ft_isdigit_adv(argv[1]) == 1)
-    {
-        i = 0;
-        message = argv[2];
-        pid = ft_atoi(argv[1]);
+	pid_t	pid;
+	char	*message;
+	int		i;
+	int		check;
+
+	if (argc == 3 && ft_isdigit_adv(argv[1]) == 1)
+	{
+		i = 0;
+		message = argv[2];
+		pid = ft_atoi(argv[1]);
 		check = kill(pid, 0);
-		if(check == -1)
+		if (check == -1)
 			error_exit("Error: Invalid Pid");
-        while (message[i])
-        {
+		while (message[i])
+		{
 			sending_msg(pid, message[i]);
 			i++;
 		}
 	}
 	else
 		error_exit("Usage: ./client [server_pid] [message]");
-    return (0);
+	return (0);
 }

@@ -1,5 +1,17 @@
-#ifndef MINI_TALK_H
-# define MINI_TALK_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_talk_bonus.h                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iouhssei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/10 14:05:05 by iouhssei          #+#    #+#             */
+/*   Updated: 2024/05/10 14:07:00 by iouhssei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINI_TALK_BONUS_H
+# define MINI_TALK_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
